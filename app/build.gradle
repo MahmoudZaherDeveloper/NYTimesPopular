@@ -1,0 +1,103 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: rootProject.file('libraries.gradle')
+
+androidExtensions {
+    experimental = true
+}
+
+android {
+    compileSdkVersion 29
+    packagingOptions {
+        pickFirst  'META-INF/*'
+    }
+    defaultConfig {
+        applicationId "com.nytimes.news"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation libraries.appCompat
+    implementation libraries.constraintsLayout
+    implementation libraries.kotlin
+    implementation libraries.coroutinesCore
+    implementation libraries.coroutinesAndroid
+    implementation libraries.coroutinesTest
+    implementation libraries.core
+    implementation libraries.coreKtx
+    implementation libraries.retrofit
+    implementation libraries.retrofitConverter
+    implementation libraries.gson
+    implementation libraries.retrofitAdapter
+    implementation libraries.jakewhartonAdapter
+    implementation libraries.navFragment
+    implementation libraries.navFragmentKtx
+    implementation libraries.navUI
+    implementation libraries.navUIKtx
+    implementation libraries.viewPager2
+    implementation libraries.lifecycleextensions
+    kapt libraries.lifecycleCompiler
+    implementation libraries.lifecycleViewmodel
+    implementation libraries.lifecycleFragment
+    implementation libraries.liveData
+    implementation libraries.kotlinCoroutinesAdapter
+    implementation libraries.rxAndroid
+    implementation libraries.rxJava
+    implementation libraries.rxBindingAppCompat
+    implementation libraries.okhttp
+    implementation libraries.okhttpLogger
+    implementation libraries.room
+    implementation libraries.roomKtx
+    kapt libraries.roomCompiler
+    implementation libraries.fragmentsKtx
+    implementation libraries.dagger
+    implementation libraries.daggerSupport
+    kapt libraries.daggerCompiler
+    kapt libraries.daggerAndroidApt
+    implementation libraries.fresco
+
+    testImplementation libraries.junit
+    testImplementation libraries.coreTest
+    testImplementation libraries.mockitoCore
+    testImplementation libraries.mockitoKotlin
+    testImplementation libraries.coroutinesTest
+    testImplementation libraries.retrofitMock
+    testImplementation libraries.archTest
+
+    androidTestImplementation libraries.mockito
+    androidTestImplementation libraries.testRules
+    androidTestImplementation libraries.extJunit
+    androidTestImplementation libraries.testRunner
+    androidTestImplementation libraries.espressoCore
+    androidTestImplementation libraries.espressoContrib
+}
